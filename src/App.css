@@ -27,3 +27,19 @@ h1 {
     align-self: center;
 }
 
+
+/* Input Styles */
+
+.input--container {
+    display: flex;
+    flex-direction: column;
+}
+
+#submitButton {
+    width: 317px;
+    height: 61px;
+    flex-shrink: 0; 
+    background-color: #28A9F1;
+    color: #04131C;
+}
+
