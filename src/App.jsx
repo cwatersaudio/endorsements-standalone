@@ -7,14 +7,37 @@ import './App.css'
 
 export default function App () {
 
+  let endorsementArray = [];
 
+  React.useEffect(() => {
+      localStorage.setItem("endorsements", JSON.stringify(endorsementArray))
+      console.log(JSON.parse(localStorage.getItem("endorsements")));
 
+  },[endorsementArray]) 
 
+  
+  function handleChange (event) {
+    console.log("Things are changing!");
+    const {name,value,type} = event.target
+    endorsementArray = () => {
+      return {
+      ...endorsementArray,
+      [name]: value
+    }
+
+    
+  }}
+
+  console.log(JSON.parse(localStorage.getItem("endorsements")));
+  
   return (
     <>
       <main>
           <Header />
-          <Input />
+          <Input 
+          handleChange={handleChange}
+          
+          />
           <Display />
 
 
@@ -24,5 +47,4 @@ export default function App () {
 
   )
 
-
-}
+  }

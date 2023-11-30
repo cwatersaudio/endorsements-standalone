@@ -9,7 +9,7 @@ export default function Input (props) {
                 Need to initialize state and make some  functions */}
                 
             </textarea>
-            <button id="submitButton">
+            <button id="submitButton" onClick={props.handleChange}>
                 Publish
             </button>
         
