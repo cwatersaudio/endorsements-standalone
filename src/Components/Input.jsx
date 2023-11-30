@@ -4,13 +4,10 @@ export default function Input (props) {
 
     return (
         <div className="input--container">
-            <textarea>
+            <textarea className="input--box" placeholder="Write your endorsement here">
                 {/* Endorsement text area here
                 Need to initialize state and make some  functions */}
-                Some placeholder text texttexttexttexttexttexttexttexttexttexttexttext
-                texttexttexttexttexttexttexttext
-                texttexttexttexttext
-                texttexttexttexttext
+                
             </textarea>
             <button id="submitButton">
                 Publish
