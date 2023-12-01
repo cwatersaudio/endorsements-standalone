@@ -8,12 +8,9 @@ export default function Input (props) {
             className="input--box user--input" 
             placeholder="Write your endorsement here"
             name="accolade"
+            value={props.current.accolade}
+            onChange={props.handleChange}
             >
-                {/* Endorsement text area here
-                Need to initialize state and make some  functions 
-                should call handleChange()
-                value should be
-                */}
                 
             </textarea>
             <div className="to-from--area">
@@ -22,7 +19,8 @@ export default function Input (props) {
                 className="user--input"
                 type="text" 
                 name="to"
-                // add value = props.to
+                value={props.current.to}
+                onChange={props.handleChange}
                 //add onChange
                 />
                 <input 
@@ -30,8 +28,8 @@ export default function Input (props) {
                 className="user--input" 
                 type="text" 
                 name="from"
-                //add value = props.from
-                //add onChange
+                value={props.current.from}
+                onChange={props.handleChange}
                 />
             </div>
             <button id="submitButton" 

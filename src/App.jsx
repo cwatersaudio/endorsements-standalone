@@ -35,7 +35,7 @@ export default function App () {
   function handleChange (event) { //updates currentValue live
     console.log("Things are changing!");
     const {name,value,type} = event.target
-    const [to,from,accolade] = endorsements.currentEndorsement
+    const {to,from,accolade} = endorsements.currentEndorsement
     setEndorsements(prevEndorsements => {
       return {
       ...endorsements,
