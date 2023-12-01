@@ -12,14 +12,14 @@ export default function Input (props) {
             >
                 
             </textarea>
-            <div className="to-from--area">
+            <div className="to-from--area"> 
                 <input 
                 className="user--input"
                 type="text" 
                 name="to"
                 value={props.current.to}
                 onChange={props.handleChange}
-                //add onChange
+                //need to figure out a way to display default values
                 />
                 <input 
                 className="user--input" 
