@@ -6,7 +6,6 @@ export default function Input (props) {
         <div className="input--container">
             <textarea 
             className="input--box user--input" 
-            placeholder="Write your endorsement here"
             name="accolade"
             value={props.current.accolade}
             onChange={props.handleChange}
@@ -15,7 +14,6 @@ export default function Input (props) {
             </textarea>
             <div className="to-from--area">
                 <input 
-                placeholder="To:"
                 className="user--input"
                 type="text" 
                 name="to"
@@ -24,7 +22,6 @@ export default function Input (props) {
                 //add onChange
                 />
                 <input 
-                placeholder="From:"
                 className="user--input" 
                 type="text" 
                 name="from"

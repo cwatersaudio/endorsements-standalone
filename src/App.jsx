@@ -15,8 +15,6 @@ export default function App () {
 
   React.useEffect(() => {
       localStorage.setItem("endorsements", JSON.stringify(endorsements))
-      console.log(JSON.parse(localStorage.getItem("endorsements")));
-
   },[endorsements]) 
 
   function addEndorsement () {
@@ -33,7 +31,7 @@ export default function App () {
   //clearCurrentValue()
   
   function handleChange (event) { //updates currentValue live
-    console.log("Things are changing!");
+    console.log(event.target.value)
     const {name,value,type} = event.target
     const {to,from,accolade} = endorsements.currentEndorsement
     setEndorsements(prevEndorsements => {
@@ -54,7 +52,7 @@ export default function App () {
           <Header />
           <Input 
           handleChange={handleChange}
-          current={endorsements.currentEndorsement}
+          current={endorsements}
           addEndorsement={addEndorsement}
           
           />
