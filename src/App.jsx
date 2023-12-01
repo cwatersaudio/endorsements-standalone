@@ -7,26 +7,44 @@ import './App.css'
 
 export default function App () {
 
-  let endorsementArray = [];
+  const [endorsements,setEndorsements] = React.useState({
+    pastEndorsements:[],
+    currentEndorsement: {id:1, from:"chris", to:"Allysen", accolade:"your're great! :)"}
+  })
+
 
   React.useEffect(() => {
-      localStorage.setItem("endorsements", JSON.stringify(endorsementArray))
+      localStorage.setItem("endorsements", JSON.stringify(endorsements))
       console.log(JSON.parse(localStorage.getItem("endorsements")));
 
-  },[endorsementArray]) 
+  },[endorsements]) 
 
+  function addEndorsement () {
+    setEndorsements(prevEndorsements => {
+      return {
+          // add current value to beginning of state array
+      }
+      
+    })
+    //function to clear out 'current value'
   
-  function handleChange (event) {
+  }
+
+  //clearCurrentValue()
+  
+  function handleChange (event) { //updates currentValue live
     console.log("Things are changing!");
     const {name,value,type} = event.target
-    endorsementArray = () => {
+    const [to,from,accolade] = endorsements.currentEndorsement
+    setEndorsements(prevEndorsements => {
       return {
-      ...endorsementArray,
+      ...endorsements,
       [name]: value
     }
+    })
 
     
-  }}
+  }
 
   console.log(JSON.parse(localStorage.getItem("endorsements")));
   
@@ -36,9 +54,12 @@ export default function App () {
           <Header />
           <Input 
           handleChange={handleChange}
+          current={endorsements.currentEndorsement}
+          addEndorsement={addEndorsement}
           
           />
-          <Display />
+          <Display
+          />
 
 
       </main>
