@@ -13,6 +13,10 @@ h1 {
     text-align: center;
 }
 
+.bold {
+    font-weight: 700;
+}
+
 /* Header Styles */
 #header {
     color: #FFFFFF;
@@ -38,7 +42,6 @@ h1 {
     flex-direction: column;
     align-items: center;
     padding: 0px 36px;
-    border: 5px solid white
 }
 
 
@@ -68,7 +71,6 @@ h1 {
     grid-template-rows: 40px;
     width: 317px;
     margin: 10px ;
-    border: solid yellow 5px
 }
 
 .to-from--input {
@@ -103,3 +105,26 @@ h1 {
 }
 
 /* Need to make sure the input boxes are spaced correctly */
+
+/* Endorsement Display Styling */
+
+#endorsementDisplay {
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin: 10px
+}
+
+.accolade--container {
+    background: #FFF;
+    color: #1B1924;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border-radius: 8px;
+    width: 317px;
+    padding: 14px;
+}

@@ -7,7 +7,7 @@ import './App.css'
 
 export default function App () {
     const [endorsements,setEndorsements] = React.useState({
-    pastEndorsements:[{}],
+    pastEndorsements:[],
     currentEndorsement: {from:"", to:"", accolade:""}
     })
 
@@ -29,6 +29,7 @@ export default function App () {
     resetCurrentEndorsement()
 
   }
+
   function resetCurrentEndorsement () {
     setEndorsements(prevEndorsements => {
       return {
@@ -68,6 +69,7 @@ console.log(endorsements)
           
           />
           <Display
+          pastEndorsements = {endorsements.pastEndorsements}
           />
 
 

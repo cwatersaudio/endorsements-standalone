@@ -1,7 +1,7 @@
 import React from "react"
 
 export default function Input ({currentEndorsement,handleChange,addEndorsement}) {
-
+    console.log(currentEndorsement);
     return (
         <form className="input--container">
             <textarea 
@@ -15,6 +15,7 @@ export default function Input ({currentEndorsement,handleChange,addEndorsement})
             </textarea>
             <div id="to-from--area"> 
                 <input 
+                placeholder="To:"
                 className="to-from--input "
                 type="text" 
                 name="to"
@@ -31,12 +32,16 @@ export default function Input ({currentEndorsement,handleChange,addEndorsement})
                 onChange={handleChange}
                 />
             </div>
-            <button 
+            {currentEndorsement.to.length > 0 
+            && currentEndorsement.from.length > 0
+            && currentEndorsement.accolade.length > 0 
+            && <button 
             id="submitButton" 
             onClick={addEndorsement}
             > 
                 Publish
-            </button>
+            </button>}
+            {/* how do i only display button if there's input */}
         
         </form>
 
