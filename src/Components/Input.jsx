@@ -1,32 +1,34 @@
 import React from "react"
 
-export default function Input (props) {
+export default function Input ({currentEndorsement,handleChange,addEndorsement}) {
 
     return (
-        <div className="input--container">
+        <form className="input--container">
             <textarea 
-            className="input--box user--input" 
+            placeholder="Write endorsement here..."
+            className="endorsement--box user--input" 
             name="accolade"
-            value={props.current.accolade}
-            onChange={props.handleChange}
+            value={currentEndorsement.accolade}
+            onChange={handleChange}
             >
                 
             </textarea>
-            <div className="to-from--area"> 
+            <div id="to-from--area"> 
                 <input 
-                className="user--input"
+                className="to-from--input "
                 type="text" 
                 name="to"
-                value={props.current.to}
-                onChange={props.handleChange}
+                onChange={handleChange}
+                value={currentEndorsement.to}
                 //need to figure out a way to display default values
                 />
                 <input 
-                className="user--input" 
+                placeholder="From:"
+                className="to-from--input " 
                 type="text" 
                 name="from"
-                value={props.current.from}
-                onChange={props.handleChange}
+                value={currentEndorsement.from}
+                onChange={handleChange}
                 />
             </div>
             <button id="submitButton" 
@@ -35,7 +37,7 @@ export default function Input (props) {
                 Publish
             </button>
         
-        </div>
+        </form>
 
     )
 

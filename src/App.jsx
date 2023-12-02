@@ -6,16 +6,15 @@ import './App.css'
 
 
 export default function App () {
-
-  const [endorsements,setEndorsements] = React.useState({
+    const [endorsements,setEndorsements] = React.useState({
     pastEndorsements:[],
-    currentEndorsement: {id:1, from:"chris", to:"Allysen", accolade:"your're great! :)"}
-  })
+    currentEndorsement: {from:"", to:"", accolade:""}
+    })
 
 
-  React.useEffect(() => {
-      localStorage.setItem("endorsements", JSON.stringify(endorsements))
-  },[endorsements]) 
+  // React.useEffect(() => {
+  //     localStorage.setItem("endorsements", JSON.stringify(endorsements))
+  // },[endorsements]) 
 
   function addEndorsement () {
     setEndorsements(prevEndorsements => {
@@ -31,28 +30,30 @@ export default function App () {
   //clearCurrentValue()
   
   function handleChange (event) { //updates currentValue live
-    console.log(event.target.value)
-    const {name,value,type} = event.target
-    const {to,from,accolade} = endorsements.currentEndorsement
+    const {value,name} = event.target
+
     setEndorsements(prevEndorsements => {
       return {
-      ...endorsements,
-      [name]: value
+      ...prevEndorsements,
+      currentEndorsement: 
+      {...prevEndorsements.currentEndorsement,
+        [name]: value
+      }
+      
     }
     })
 
     
   }
 
-  console.log(JSON.parse(localStorage.getItem("endorsements")));
-  
+console.log(endorsements)  
   return (
     <>
       <main>
           <Header />
           <Input 
           handleChange={handleChange}
-          current={endorsements}
+          currentEndorsement={endorsements.currentEndorsement}
           addEndorsement={addEndorsement}
           
           />
