@@ -12,22 +12,31 @@ export default function App () {
     })
 
 
-  // React.useEffect(() => {
-  //     localStorage.setItem("endorsements", JSON.stringify(endorsements))
-  // },[endorsements]) 
+  React.useEffect(() => {
+      localStorage.setItem("endorsements", JSON.stringify(endorsements))
+  },[endorsements]) 
 
-  function addEndorsement () {
+  function addEndorsement (event) {
+    event.preventDefault()
+    
     setEndorsements(prevEndorsements => {
+      resetCurrentEndorsement()
       return {
-          // add current value to beginning of state array
+        ...prevEndorsements,
+        pastEndorsements: prevEndorsements.pastEndorsements.unshift(prevEndorsements.currentEndorsement)
       }
       
     })
-    //function to clear out 'current value'
-  
+  }
+  function resetCurrentEndorsement () {
+    setEndorsements(prevEndorsements => {
+      return {
+      ...prevEndorsements,
+      currentEndorsement: {from:"", to:"", accolade:""}
+  }})
   }
 
-  //clearCurrentValue()
+
   
   function handleChange (event) { //updates currentValue live
     const {value,name} = event.target

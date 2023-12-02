@@ -31,8 +31,9 @@ export default function Input ({currentEndorsement,handleChange,addEndorsement})
                 onChange={handleChange}
                 />
             </div>
-            <button id="submitButton" 
-            // add onClick --> addEndorsement()
+            <button 
+            id="submitButton" 
+            onClick={addEndorsement}
             > 
                 Publish
             </button>
