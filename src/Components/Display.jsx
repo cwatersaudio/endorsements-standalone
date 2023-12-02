@@ -2,7 +2,7 @@ import React from "react"
 import Accolade from "./Accolade"
 
 
-export default function Endorsements ({pastEndorsements}) {
+export default function Endorsements ({pastEndorsements,handleChange}) {
 
 const endorsementDisplay = pastEndorsements.map(item => {
     console.log(item);
@@ -12,6 +12,7 @@ const endorsementDisplay = pastEndorsements.map(item => {
         to={item.to}
         from={item.from}
         accolade={item.accolade}
+        handleChange={handleChange}
         />
     )
 })

@@ -70,6 +70,7 @@ console.log(endorsements)
           />
           <Display
           pastEndorsements = {endorsements.pastEndorsements}
+          handleChange={handleChange}
           />
 
 
