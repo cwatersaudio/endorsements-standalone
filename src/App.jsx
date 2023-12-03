@@ -2,15 +2,15 @@ import React from "react"
 import Header from "./Components/Header"
 import Input from "./Components/Input"
 import Display from "./Components/Display"
+import { nanoid } from 'nanoid'
 import './App.css'
 
 
 export default function App () {
     const [endorsements,setEndorsements] = React.useState({
     pastEndorsements:[],
-    currentEndorsement: {from:"", to:"", accolade:""}
+    currentEndorsement: {from:"", to:"", accolade:"", id:nanoid()}
     })
-    //iniitialize currentEndorsement with an id using nanoid()
 
 
   React.useEffect(() => {
@@ -35,10 +35,9 @@ export default function App () {
     setEndorsements(prevEndorsements => {
       return {
       ...prevEndorsements,
-      currentEndorsement: {from:"", to:"", accolade:""}
+      currentEndorsement: {from:"", to:"", accolade:"", id:nanoid()}
   }})
   }
-//set new id with nanoid()
 
   
   function handleChange (event) { //updates currentValue live

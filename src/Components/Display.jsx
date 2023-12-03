@@ -8,7 +8,7 @@ const endorsementDisplay = pastEndorsements.map(item => {
     console.log(item);
     return (
         <Accolade 
-        key={item.index}
+        key={item.id}
         to={item.to}
         from={item.from}
         accolade={item.accolade}
