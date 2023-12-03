@@ -9,7 +9,7 @@ import './App.css'
 export default function App () {
     const [endorsements,setEndorsements] = React.useState({
     pastEndorsements:[],
-    currentEndorsement: {from:"", to:"", accolade:"", id:nanoid()}
+    currentEndorsement: {from:"", to:"", accolade:"", id:nanoid(), likes:0}
     })
 
 
@@ -35,7 +35,7 @@ export default function App () {
     setEndorsements(prevEndorsements => {
       return {
       ...prevEndorsements,
-      currentEndorsement: {from:"", to:"", accolade:"", id:nanoid()}
+      currentEndorsement: {from:"", to:"", accolade:"", id:nanoid(), likes:0}
   }})
   }
 
@@ -54,7 +54,18 @@ export default function App () {
       }
       })
     }
-
+  function addLike(id) {
+    const itemToUpdate = endorsements.pastEndorsements.find((item)=> item.id === id)
+    itemToUpdate.likes += 1
+    console.log(itemToUpdate)
+    setEndorsements(prevEndorsements => {
+      
+      return {
+        ...prevEndorsements,
+        [prevEndorsements.pastEndorsements[id]]: itemToUpdate
+      }
+    })
+  }
     //add addLikes() function
     //save hasLiked in local storage
     //save 'likes' in state
@@ -73,6 +84,7 @@ return (
           <Display
           pastEndorsements = {endorsements.pastEndorsements}
           handleChange={handleChange}
+          addLike={addLike}
           />
       </main>
     </>

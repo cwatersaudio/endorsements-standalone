@@ -1,9 +1,8 @@
 import React from "react";
 
 export default function Accolade (props) {
-    function handleClick (event) {
-
-        console.log(event);
+    function handleClick (event){
+        props.addLike(props.id)
     }
     return(
         <div className="accolade--container">
@@ -12,11 +11,11 @@ export default function Accolade (props) {
             <p className="bold">{props.to}</p>
             <button
             onClick={handleClick}
+            className="bold"
             //add name field
-            //add 'likes' variable somewhere
-            
 
-            >💜</button>
+
+            >{`💜 ${props.likes}`}</button>
 
         </div>
     )
