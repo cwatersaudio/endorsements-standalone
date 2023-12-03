@@ -4,6 +4,9 @@ import Input from "./Components/Input"
 import Display from "./Components/Display"
 import { nanoid } from 'nanoid'
 import './App.css'
+import {addDoc, onSnapshot} from "firebase/firestore"
+import { endorsementCollection } from "./firebase"
+
 
 
 export default function App () {
@@ -14,16 +17,23 @@ export default function App () {
 
 
   React.useEffect(() => {
-      localStorage.setItem("endorsements", JSON.stringify(endorsements))
-  },[endorsements]) 
+    const unsubscribe = onSnapshot(endorsementCollection, function(snapshot){
+      const endorsementsArray = snapshot.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id
+      }))
+    }) 
+    return unsubscribe
+   },[]) 
 
-  function addEndorsement (event) {
+  async function addEndorsement (event) {
     event.preventDefault()
-
+    const newEndorsementRef = await addDoc(endorsementCollection,endorsements.currentEndorsement)
+    console.log(newEndorsementRef); 
     setEndorsements(prevEndorsements => {
           return {
             ...prevEndorsements,
-            pastEndorsements: [prevEndorsements.currentEndorsement, ...prevEndorsements.pastEndorsements]
+            pastEndorsements: [newEndorsementRef, ...prevEndorsements.pastEndorsements]
           }
           
           })
@@ -69,7 +79,7 @@ export default function App () {
   }
  
 
-console.log(endorsements)  
+
   
 return (
     <>

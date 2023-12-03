@@ -5,7 +5,6 @@ import Accolade from "./Accolade"
 export default function Endorsements ({pastEndorsements,handleChange,addLike}) {
 
 const endorsementDisplay = pastEndorsements.map(item => {
-    console.log(item);
     return (
         <Accolade 
         key={item.id}
