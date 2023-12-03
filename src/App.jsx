@@ -10,6 +10,7 @@ export default function App () {
     pastEndorsements:[],
     currentEndorsement: {from:"", to:"", accolade:""}
     })
+    //iniitialize currentEndorsement with an id using nanoid()
 
 
   React.useEffect(() => {
@@ -20,13 +21,13 @@ export default function App () {
     event.preventDefault()
 
     setEndorsements(prevEndorsements => {
-      return {
-        ...prevEndorsements,
-        pastEndorsements: [prevEndorsements.currentEndorsement, ...prevEndorsements.pastEndorsements]
-      }
-      
-    })
-    resetCurrentEndorsement()
+          return {
+            ...prevEndorsements,
+            pastEndorsements: [prevEndorsements.currentEndorsement, ...prevEndorsements.pastEndorsements]
+          }
+          
+          })
+      resetCurrentEndorsement()
 
   }
 
@@ -37,28 +38,30 @@ export default function App () {
       currentEndorsement: {from:"", to:"", accolade:""}
   }})
   }
-
+//set new id with nanoid()
 
   
   function handleChange (event) { //updates currentValue live
     const {value,name} = event.target
 
     setEndorsements(prevEndorsements => {
-      return {
-      ...prevEndorsements,
-      currentEndorsement: 
-      {...prevEndorsements.currentEndorsement,
-        [name]: value
+          return {
+          ...prevEndorsements,
+          currentEndorsement: 
+          {...prevEndorsements.currentEndorsement,
+            [name]: value
+          }
+          
       }
-      
+      })
     }
-    })
 
-    
-  }
-
+    //add addLikes() function
+    //save hasLiked in local storage
+    //save 'likes' in state
 console.log(endorsements)  
-  return (
+  
+return (
     <>
       <main>
           <Header />
@@ -72,12 +75,7 @@ console.log(endorsements)
           pastEndorsements = {endorsements.pastEndorsements}
           handleChange={handleChange}
           />
-
-
       </main>
-    
     </>
-
   )
-
   }

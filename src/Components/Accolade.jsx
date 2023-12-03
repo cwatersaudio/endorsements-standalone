@@ -12,6 +12,9 @@ export default function Accolade (props) {
             <p className="bold">{props.to}</p>
             <button
             onClick={handleClick}
+            //add name field
+            //add 'likes' variable somewhere
+            
 
             >💜</button>
 
