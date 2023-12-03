@@ -65,10 +65,10 @@ export default function App () {
         [prevEndorsements.pastEndorsements[id]]: itemToUpdate
       }
     })
+       //save hasLiked in local storage
   }
-    //add addLikes() function
-    //save hasLiked in local storage
-    //save 'likes' in state
+ 
+
 console.log(endorsements)  
   
 return (
