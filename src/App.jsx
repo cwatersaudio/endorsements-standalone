@@ -12,16 +12,18 @@ import { endorsementCollection } from "./firebase"
 export default function App () {
     const [endorsements,setEndorsements] = React.useState({
     pastEndorsements:[],
-    currentEndorsement: {from:"", to:"", accolade:"", id:nanoid(), likes:0}
+    currentEndorsement: {from:"", to:"", accolade:"", likes:0}
     })
 
+    let endorsementsArray;
 
   React.useEffect(() => {
     const unsubscribe = onSnapshot(endorsementCollection, function(snapshot){
-      const endorsementsArray = snapshot.docs.map(doc => ({
+    endorsementsArray = snapshot.docs.map(doc => ({
         ...doc.data(),
         id: doc.id
       }))
+      console.log(endorsementsArray);
     }) 
     return unsubscribe
    },[]) 
@@ -33,7 +35,7 @@ export default function App () {
     setEndorsements(prevEndorsements => {
           return {
             ...prevEndorsements,
-            pastEndorsements: [newEndorsementRef, ...prevEndorsements.pastEndorsements]
+            pastEndorsements: endorsementsArray
           }
           
           })
@@ -45,7 +47,7 @@ export default function App () {
     setEndorsements(prevEndorsements => {
       return {
       ...prevEndorsements,
-      currentEndorsement: {from:"", to:"", accolade:"", id:nanoid(), likes:0}
+      currentEndorsement: {from:"", to:"", accolade:"", likes:0}
   }})
   }
 
