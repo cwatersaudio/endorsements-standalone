@@ -1,3 +1,5 @@
+import {initializeApp} from 'https://endorsements-aa2b6-default-rtdb.firebaseio.com/'
+import { getDatabase, ref, push, onValue } from "https://endorsements-aa2b6-default-rtdb.firebaseio.com/"
 import React from "react"
 import Header from "./Components/Header"
 import Input from "./Components/Input"
@@ -5,6 +7,14 @@ import Display from "./Components/Display"
 import { nanoid } from 'nanoid'
 import './App.css'
 
+
+const appSettings = {
+  databaseURL: "https://endorsements-aa2b6-default-rtdb.firebaseio.com"
+}
+
+const app = initializeApp(appSettings);
+const database = getDatabase(app);
+const funeralHomes =  ref(database, "endorsements")
 
 export default function App () {
     const [endorsements,setEndorsements] = React.useState({
