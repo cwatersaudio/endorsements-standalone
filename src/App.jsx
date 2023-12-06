@@ -14,13 +14,19 @@ const appSettings = {
 
 const app = initializeApp(appSettings);
 const database = getDatabase(app);
-const funeralHomes =  ref(database, "endorsements")
+const endorsementdb =  ref(database, "endorsements")
 
 export default function App () {
     const [endorsements,setEndorsements] = React.useState({
-    pastEndorsements:[],
+    pastEndorsements: Object.entries(snapshot.val()),
     currentEndorsement: {from:"", to:"", accolade:"", id:nanoid(), likes:0}
     })
+
+
+
+
+
+
 
 
   React.useEffect(() => {
