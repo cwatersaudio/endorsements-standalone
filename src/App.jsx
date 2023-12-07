@@ -15,10 +15,11 @@ const appSettings = {
 const app = initializeApp(appSettings);
 const database = getDatabase(app);
 const endorsementDb =  ref(database, "endorsements")
+let firebaseEndorsements=[]
 
 export default function App () {
     const [endorsements,setEndorsements] = React.useState({
-    pastEndorsements: [],
+    pastEndorsements: firebaseEndorsements,
     currentEndorsement: {from:"", to:"", accolade:"", id:nanoid(), likes:0}
     })
 
@@ -26,7 +27,11 @@ export default function App () {
 
   React.useEffect(() => {
       localStorage.setItem("endorsements", JSON.stringify(endorsements))
-  },[endorsements]) 
+      onValue(endorsementDb, (snapshot)=> {
+        firebaseEndorsements = snapshot.val()
+        console.log('db is changing')
+      })
+  },[]) //what should be the thing in the array?
 
   function addEndorsement (event) {
     event.preventDefault()
@@ -39,7 +44,7 @@ export default function App () {
           
           })
       resetCurrentEndorsement()
-      push(endorsementDb,endorsements.pastEndorsements)
+      push(endorsementDb,endorsements.currentEndorsement) //adds currentEndorsement to db
 
   }
 
