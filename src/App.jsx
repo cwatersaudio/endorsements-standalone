@@ -28,8 +28,16 @@ export default function App () {
   React.useEffect(() => {
       localStorage.setItem("endorsements", JSON.stringify(endorsements))
       onValue(endorsementDb, (snapshot)=> {
-        firebaseEndorsements = snapshot.val()
+        firebaseEndorsements = Object.entries(snapshot.val())
+        setEndorsements(prevEndorsements => {
+          return {
+          ...prevEndorsements,
+          pastEndorsements: firebaseEndorsements
+          }
+        })
         console.log(firebaseEndorsements)
+        console.log(endorsements.pastEndorsements)
+        console.log(typeof(firebaseEndorsements))
       })
   },[]) //what should be the thing in the array?
 
