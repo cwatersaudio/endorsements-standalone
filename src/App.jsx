@@ -1,5 +1,5 @@
-import {initializeApp} from 'https://endorsements-aa2b6-default-rtdb.firebaseio.com/'
-import { getDatabase, ref, push, onValue } from "https://endorsements-aa2b6-default-rtdb.firebaseio.com/"
+import {initializeApp} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js'
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 import React from "react"
 import Header from "./Components/Header"
 import Input from "./Components/Input"
@@ -14,18 +14,13 @@ const appSettings = {
 
 const app = initializeApp(appSettings);
 const database = getDatabase(app);
-const endorsementdb =  ref(database, "endorsements")
+const endorsementDb =  ref(database, "endorsements")
 
 export default function App () {
     const [endorsements,setEndorsements] = React.useState({
-    pastEndorsements: Object.entries(snapshot.val()),
+    pastEndorsements: [],
     currentEndorsement: {from:"", to:"", accolade:"", id:nanoid(), likes:0}
     })
-
-
-
-
-
 
 
 
@@ -44,6 +39,7 @@ export default function App () {
           
           })
       resetCurrentEndorsement()
+      push(endorsementDb,endorsements.pastEndorsements)
 
   }
 
