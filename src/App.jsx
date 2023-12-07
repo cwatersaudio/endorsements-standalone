@@ -28,7 +28,7 @@ export default function App () {
   React.useEffect(() => {
       localStorage.setItem("endorsements", JSON.stringify(endorsements))
       onValue(endorsementDb, (snapshot)=> {
-        firebaseEndorsements = Object.entries(snapshot.val())
+        firebaseEndorsements = Object.values(snapshot.val())
         setEndorsements(prevEndorsements => {
           return {
           ...prevEndorsements,
@@ -36,7 +36,6 @@ export default function App () {
           }
         })
         console.log(firebaseEndorsements)
-        console.log(endorsements.pastEndorsements)
         console.log(typeof(firebaseEndorsements))
       })
   },[]) //what should be the thing in the array?
@@ -93,7 +92,7 @@ export default function App () {
        //save hasLiked in local storage
   }
  
-
+console.log(Object.values(endorsements))
   
 return (
     <>
