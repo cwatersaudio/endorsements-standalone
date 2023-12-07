@@ -1,7 +1,6 @@
 import React from "react"
 
 export default function Input ({currentEndorsement,handleChange,addEndorsement}) {
-    console.log(currentEndorsement);
     return (
         <form className="input--container">
             <textarea 

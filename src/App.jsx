@@ -29,7 +29,7 @@ export default function App () {
       localStorage.setItem("endorsements", JSON.stringify(endorsements))
       onValue(endorsementDb, (snapshot)=> {
         firebaseEndorsements = snapshot.val()
-        console.log('db is changing')
+        console.log(firebaseEndorsements)
       })
   },[]) //what should be the thing in the array?
 
@@ -86,7 +86,6 @@ export default function App () {
   }
  
 
-console.log(endorsements)  
   
 return (
     <>
