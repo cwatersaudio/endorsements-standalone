@@ -51,7 +51,7 @@ export default function App () {
           
           })
       resetCurrentEndorsement()
-      push(endorsementDb,endorsements.currentEndorsement) //adds currentEndorsement to db
+      push(endorsementDb,endorsements.currentEndorsement) //how to add to beginning of db??
 
   }
 

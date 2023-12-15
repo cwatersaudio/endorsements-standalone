@@ -6,9 +6,9 @@ export default function Accolade (props) {
     }
     return(
         <div className="accolade--container">
-            <p className="bold">{props.from}</p>
+            <p className="bold">To: {props.to}</p>
             <p>{props.accolade}</p>
-            <p className="bold">{props.to}</p>
+            <p className="bold">From: {props.from}</p>
             <button
             onClick={handleClick}
             className="bold"

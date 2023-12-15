@@ -96,6 +96,7 @@ h1 {
     font-weight: 400;
     line-height: normal;
     width: 152.852px;
+    padding: 10px;
 }
 #submitButton {
     width: 317px;
@@ -125,6 +126,8 @@ h1 {
 }
 
 .accolade--container {
+    /* display: flex;
+    flex-direction: column; */
     background: #FFF;
     color: #1B1924;
     font-family: Inter;
@@ -135,5 +138,4 @@ h1 {
     border-radius: 8px;
     width: 317px;
     padding: 14px;
-    /* overflow: scroll; */
 }
