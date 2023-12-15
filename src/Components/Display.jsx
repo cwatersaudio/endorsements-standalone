@@ -15,6 +15,7 @@ const endorsementDisplay = pastEndorsements.map(item => {
         accolade={item.accolade}
         handleChange={handleChange}
         addLike={addLike}
+        likes={item.likes}
         />
     )
 })
