@@ -20,7 +20,7 @@ let firebaseEndorsements=[]
 export default function App () {
     const [endorsements,setEndorsements] = React.useState({
     pastEndorsements: firebaseEndorsements,
-    currentEndorsement: {from:"", to:"", accolade:"", id:nanoid(), likes:0}
+    currentEndorsement: {from:"", to:"", accolade:"", id:nanoid(), likes:0, hasLiked:false}
     })
 
 
@@ -59,7 +59,7 @@ export default function App () {
     setEndorsements(prevEndorsements => {
       return {
       ...prevEndorsements,
-      currentEndorsement: {from:"", to:"", accolade:"", id:nanoid(), likes:0}
+      currentEndorsement: {from:"", to:"", accolade:"", id:nanoid(), likes:0, hasLiked:false}
   }})
   }
 
@@ -80,7 +80,9 @@ export default function App () {
     }
   function addLike(id) {
     const itemToUpdate = endorsements.pastEndorsements.find((item)=> item.id === id)
+    if (!itemToUpdate.hasLiked) {
     itemToUpdate.likes += 1
+    itemToUpdate.hasLiked=true;
     console.log(itemToUpdate)
     setEndorsements(prevEndorsements => {
       
@@ -89,7 +91,8 @@ export default function App () {
         [prevEndorsements.pastEndorsements[id]]: itemToUpdate
       }
     })
-       //save hasLiked in local storage
+  }
+ 
   }
  
 console.log(Object.values(endorsements))
