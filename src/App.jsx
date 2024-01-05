@@ -1,5 +1,5 @@
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js'
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { getDatabase, ref, push, onValue, update } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 import React from "react"
 import Header from "./Components/Header"
 import Input from "./Components/Input"
@@ -83,19 +83,25 @@ export default function App () {
     if (!itemToUpdate.hasLiked) {
     itemToUpdate.likes += 1
     itemToUpdate.hasLiked=true;
-    console.log(itemToUpdate)
-    setEndorsements(prevEndorsements => {
+    // setEndorsements(prevEndorsements => {
       
-      return {
-        ...prevEndorsements,
-        [prevEndorsements.pastEndorsements[id]]: itemToUpdate
-      }
-    })
+    //   return {
+    //     ...prevEndorsements,
+    //     [prevEndorsements.pastEndorsements[id]]: itemToUpdate
+    //   }
+    // })
+    const updates = {};
+    updates['endorsements/' + itemToUpdate.id + '/' + 'likes' ] = itemToUpdate.likes;
+    updates['endorsements/' + itemToUpdate.id + '/' + 'hasLiked' ] = itemToUpdate.hasLiked;
+
+    
+    update(endorsementDb, updates)
+    
+
+  }
+ // needs to write to db and not update state
   }
  
-  }
- 
-console.log(Object.values(endorsements))
   
 return (
     <>
