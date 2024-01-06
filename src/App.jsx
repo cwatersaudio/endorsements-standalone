@@ -4,7 +4,6 @@ import React from "react"
 import Header from "./Components/Header"
 import Input from "./Components/Input"
 import Display from "./Components/Display"
-import { nanoid } from 'nanoid'
 import './App.css'
 
 
@@ -26,7 +25,17 @@ export default function App () {
 
 
   React.useEffect(() => {
-      localStorage.setItem("endorsements", JSON.stringify(endorsements)) //localStorage keeps copy of endorsements as well, for the purpose of hasLiked
+      let localLikes = endorsements.pastEndorsements.map(item => {
+        return {
+          likeID : item[0],
+          hasLiked : false
+        }
+      }
+
+      )
+      
+      localStorage.setItem("endorsements", JSON.stringify(localLikes)) //localStorage keeps copy of endorsements as well, for the purpose of hasLiked
+      console.log(localLikes)
       onValue(endorsementDb, (snapshot)=> { //state is updated with firebase DB
         firebaseEndorsements = Object.entries(snapshot.val())
         setEndorsements(prevEndorsements => {
