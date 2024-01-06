@@ -87,9 +87,8 @@ console.log(endorsements);
     }
   function addLike(id) {
     const itemToUpdate = endorsements.pastEndorsements.find((item)=> item[0] === id)
-    const itemToCheck = localLikes.find((item) => item.likeID === id)
-    console.log(itemToCheck)
-    if (!itemToCheck.hasLiked) {
+    console.log(itemToUpdate)
+    if (!itemToUpdate[1].hasLiked) {
     itemToUpdate[1].likes += 1
     itemToUpdate[1].hasLiked=true;
     // setEndorsements(prevEndorsements => {
@@ -110,7 +109,6 @@ console.log(endorsements);
     
 
   }
- // needs to write to db and not update state
   }
  
   
