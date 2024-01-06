@@ -50,14 +50,7 @@ console.log(endorsements);
 
   function addEndorsement (event) {
     event.preventDefault()
-
-    setEndorsements(prevEndorsements => {
-          return {
-            ...prevEndorsements,
-            pastEndorsements: [prevEndorsements.currentEndorsement, ...prevEndorsements.pastEndorsements]
-          }
-          
-          }) //is this necessary?  Could just update DB directly perhaps?
+    
       resetCurrentEndorsement()
       push(endorsementDb,endorsements.currentEndorsement) //how to add to beginning of db??
   }
