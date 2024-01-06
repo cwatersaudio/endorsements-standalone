@@ -2,7 +2,7 @@ import React from "react"
 import Accolade from "./Accolade"
 
 
-export default function Endorsements ({pastEndorsements,handleChange,addLike,localLikes}) {
+export default function Endorsements ({pastEndorsements,handleChange,addLike,localLikes, resetLike}) {
 
 const endorsementDisplay = pastEndorsements.map(item => {
     const {id, to, from, accolade, likes} = item[1]
@@ -16,6 +16,7 @@ const endorsementDisplay = pastEndorsements.map(item => {
         handleChange={handleChange}
         addLike={addLike}
         likes={likes}
+        resetLike = {resetLike}
         />
     )
 })
@@ -24,6 +25,7 @@ const endorsementDisplay = pastEndorsements.map(item => {
 return (
     <div id="endorsementDisplay">
         {endorsementDisplay}
+        
     
     </div>
 )

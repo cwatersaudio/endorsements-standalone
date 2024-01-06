@@ -99,9 +99,16 @@ console.log(endorsements);
 
 
     update(endorsementDb, updates) 
-    
-
   }
+  }
+
+  function resetLike(id) { 
+    console.log("double click")
+    const itemToReset= endorsements.pastEndorsements.find((item)=> item[0] === id)
+    itemToReset[1].hasLiked = false
+
+    const updates = {};
+    updates[itemToReset[0] + '/' + 'hasLiked' ] = itemToReset[1].hasLiked;
   }
  
   
@@ -120,6 +127,7 @@ return (
           handleChange={handleChange}
           addLike={addLike}
           localLikes ={localLikes}
+          resetLike={resetLike}
           />
       </main>
     </>
