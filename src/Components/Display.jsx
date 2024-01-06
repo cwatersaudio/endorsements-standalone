@@ -9,7 +9,7 @@ const endorsementDisplay = pastEndorsements.map(item => {
     return (
         <Accolade 
         key={item[0]}
-        id={id}
+        id={item[0]}
         to={to}
         from={from}
         accolade={accolade}

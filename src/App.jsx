@@ -78,10 +78,11 @@ console.log(endorsements);
       })
     }
   function addLike(id) {
-    const itemToUpdate = endorsements.pastEndorsements.find((item)=> item.id === id)
-    if (!itemToUpdate.hasLiked) {
-    itemToUpdate.likes += 1
-    itemToUpdate.hasLiked=true;
+    const itemToUpdate = endorsements.pastEndorsements.find((item)=> item[0] === id)
+    console.log(itemToUpdate)
+    if (!itemToUpdate[1].hasLiked) {
+    itemToUpdate[1].likes += 1
+    itemToUpdate[1].hasLiked=true;
     // setEndorsements(prevEndorsements => {
       
     //   return {
@@ -90,8 +91,8 @@ console.log(endorsements);
     //   }
     // })
     const updates = {};
-    updates['endorsements/' + itemToUpdate.id + '/' + 'likes' ] = itemToUpdate.likes;
-    updates['endorsements/' + itemToUpdate.id + '/' + 'hasLiked' ] = itemToUpdate.hasLiked;
+    updates[itemToUpdate[0] + '/' + 'likes' ] = itemToUpdate[1].likes;
+    updates[itemToUpdate[0] + '/' + 'hasLiked' ] = itemToUpdate[1].hasLiked;
 
 
 
