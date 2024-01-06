@@ -6,16 +6,21 @@ export default function Accolade (props) {
     }
     return(
         <div className="accolade--container">
-            <p className="bold">{props.from}</p>
+            <div className="top--bar to-from--display">
+                <p>To: <span className="bold">{props.to}</span></p>
+            </div>
             <p>{props.accolade}</p>
-            <p className="bold">{props.to}</p>
-            <button
-            onClick={handleClick}
-            className="bold"
-            //add name field
-
-
-            >{`💜 ${props.likes}`}</button>
+            <div className="bottom--bar">
+                <div className="to-from--display">
+                    <p >From: <span className="bold">{props.from}</span></p>
+                </div>
+                <button
+                id="likeButton"
+                onClick={handleClick}
+                className="bold"
+                //add name field
+                >{`💜 ${props.likes}`}</button>
+            </div>
 
         </div>
     )

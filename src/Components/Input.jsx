@@ -40,7 +40,7 @@ export default function Input ({currentEndorsement,handleChange,addEndorsement})
             > 
                 Publish
             </button>}
-            {/* how do i only display button if there's input */}
+            
         
         </form>
 

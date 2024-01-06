@@ -1,53 +1,65 @@
+import {initializeApp} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js'
+import { getDatabase, ref, push, onValue, update } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 import React from "react"
 import Header from "./Components/Header"
 import Input from "./Components/Input"
 import Display from "./Components/Display"
-import { nanoid } from 'nanoid'
 import './App.css'
-import {addDoc, onSnapshot} from "firebase/firestore"
-import { endorsementCollection } from "./firebase"
 
 
+const appSettings = {
+  databaseURL: "https://endorsements-aa2b6-default-rtdb.firebaseio.com"
+}
+
+const app = initializeApp(appSettings);
+const database = getDatabase(app);
+const endorsementDb =  ref(database, "endorsements")
+let firebaseEndorsements=[]
+let localLikes = []
 
 export default function App () {
     const [endorsements,setEndorsements] = React.useState({
-    pastEndorsements:[],
-    currentEndorsement: {from:"", to:"", accolade:"", likes:0}
+    pastEndorsements: firebaseEndorsements, //local state is set by firebase DB
+    currentEndorsement: {from:"", to:"", accolade:"", likes:0, hasLiked:false}
     })
 
-    let endorsementsArray;
+
 
   React.useEffect(() => {
-    const unsubscribe = onSnapshot(endorsementCollection, function(snapshot){
-    endorsementsArray = snapshot.docs.map(doc => ({
-        ...doc.data(),
-        id: doc.id
-      }))
-      console.log(endorsementsArray);
-    }) 
-    return unsubscribe
-   },[]) 
-
-  async function addEndorsement (event) {
-    event.preventDefault()
-    const newEndorsementRef = await addDoc(endorsementCollection,endorsements.currentEndorsement)
-    console.log(newEndorsementRef); 
-    setEndorsements(prevEndorsements => {
+      localLikes = endorsements.pastEndorsements.map(item => { //local array of item IDs and hasLiked boolean
+        return {
+          likeID : item[0],
+          hasLiked : false
+        }
+      }
+      )
+      
+      localStorage.setItem("endorsements", JSON.stringify(localLikes)) //localStorage keeps copy of endorsements as well, for the purpose of hasLiked
+      onValue(endorsementDb, (snapshot)=> { //state is updated with firebase DB
+        firebaseEndorsements = Object.entries(snapshot.val())
+        setEndorsements(prevEndorsements => {
           return {
-            ...prevEndorsements,
-            pastEndorsements: endorsementsArray
+          ...prevEndorsements,
+          pastEndorsements: firebaseEndorsements
           }
-          
-          })
-      resetCurrentEndorsement()
+        })
+      })
+  },[]) //what should be the thing in the array?
 
+console.log(endorsements);
+
+  function addEndorsement (event) {
+    event.preventDefault()
+    
+      resetCurrentEndorsement()
+      push(endorsementDb,endorsements.currentEndorsement) //how to add to beginning of db??
   }
 
   function resetCurrentEndorsement () {
     setEndorsements(prevEndorsements => {
       return {
       ...prevEndorsements,
-      currentEndorsement: {from:"", to:"", accolade:"", likes:0}
+      currentEndorsement: {from:"", to:"", accolade:"", likes:0, hasLiked:false}
   }})
   }
 
@@ -67,21 +79,31 @@ export default function App () {
       })
     }
   function addLike(id) {
-    const itemToUpdate = endorsements.pastEndorsements.find((item)=> item.id === id)
-    itemToUpdate.likes += 1
+    const itemToUpdate = endorsements.pastEndorsements.find((item)=> item[0] === id)
     console.log(itemToUpdate)
-    setEndorsements(prevEndorsements => {
+    if (!itemToUpdate[1].hasLiked) {
+    itemToUpdate[1].likes += 1
+    itemToUpdate[1].hasLiked=true;
+    // setEndorsements(prevEndorsements => {
       
-      return {
-        ...prevEndorsements,
-        [prevEndorsements.pastEndorsements[id]]: itemToUpdate
-      }
-    })
-       //save hasLiked in local storage
+    //   return {
+    //     ...prevEndorsements,
+    //     [prevEndorsements.pastEndorsements[id]]: itemToUpdate
+    //   }
+    // })
+    const updates = {};
+    updates[itemToUpdate[0] + '/' + 'likes' ] = itemToUpdate[1].likes;
+    updates[itemToUpdate[0] + '/' + 'hasLiked' ] = itemToUpdate[1].hasLiked;
+
+
+
+
+    update(endorsementDb, updates) 
+    
+
+  }
   }
  
-
-
   
 return (
     <>
@@ -97,6 +119,7 @@ return (
           pastEndorsements = {endorsements.pastEndorsements}
           handleChange={handleChange}
           addLike={addLike}
+          localLikes ={localLikes}
           />
       </main>
     </>
