@@ -19,15 +19,15 @@ let firebaseEndorsements=[]
 
 export default function App () {
     const [endorsements,setEndorsements] = React.useState({
-    pastEndorsements: firebaseEndorsements,
+    pastEndorsements: firebaseEndorsements, //local state is set by firebase DB
     currentEndorsement: {from:"", to:"", accolade:"", id:nanoid(), likes:0, hasLiked:false}
     })
 
 
 
   React.useEffect(() => {
-      localStorage.setItem("endorsements", JSON.stringify(endorsements))
-      onValue(endorsementDb, (snapshot)=> {
+      localStorage.setItem("endorsements", JSON.stringify(endorsements)) //localStorage keeps copy of endorsements as well, for the purpose of hasLiked
+      onValue(endorsementDb, (snapshot)=> { //state is updated with firebase DB
         firebaseEndorsements = Object.values(snapshot.val())
         setEndorsements(prevEndorsements => {
           return {
@@ -83,19 +83,19 @@ export default function App () {
     if (!itemToUpdate.hasLiked) {
     itemToUpdate.likes += 1
     itemToUpdate.hasLiked=true;
-    // setEndorsements(prevEndorsements => {
+    setEndorsements(prevEndorsements => {
       
-    //   return {
-    //     ...prevEndorsements,
-    //     [prevEndorsements.pastEndorsements[id]]: itemToUpdate
-    //   }
-    // })
-    const updates = {};
-    updates['endorsements/' + itemToUpdate.id + '/' + 'likes' ] = itemToUpdate.likes;
-    updates['endorsements/' + itemToUpdate.id + '/' + 'hasLiked' ] = itemToUpdate.hasLiked;
+      return {
+        ...prevEndorsements,
+        [prevEndorsements.pastEndorsements[id]]: itemToUpdate
+      }
+    })
+    // const updates = {};
+    // updates['endorsements/' + itemToUpdate.id + '/' + 'likes' ] = itemToUpdate.likes;
+    // updates['endorsements/' + itemToUpdate.id + '/' + 'hasLiked' ] = itemToUpdate.hasLiked;
 
     
-    update(endorsementDb, updates)
+    // update(endorsementDb, updates)
     
 
   }
