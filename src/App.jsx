@@ -35,10 +35,10 @@ export default function App () {
           pastEndorsements: firebaseEndorsements
           }
         })
-        console.log(firebaseEndorsements)
-        console.log(typeof(firebaseEndorsements))
       })
   },[]) //what should be the thing in the array?
+
+console.log(endorsements);
 
   function addEndorsement (event) {
     event.preventDefault()
@@ -49,10 +49,9 @@ export default function App () {
             pastEndorsements: [prevEndorsements.currentEndorsement, ...prevEndorsements.pastEndorsements]
           }
           
-          })
+          }) //is this necessary?  Could just update DB directly perhaps?
       resetCurrentEndorsement()
       push(endorsementDb,endorsements.currentEndorsement) //how to add to beginning of db??
-
   }
 
   function resetCurrentEndorsement () {
