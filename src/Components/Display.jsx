@@ -5,16 +5,17 @@ import Accolade from "./Accolade"
 export default function Endorsements ({pastEndorsements,handleChange,addLike}) {
 
 const endorsementDisplay = pastEndorsements.map(item => {
+    const {id, to, from, accolade, likes} = item[1]
     return (
         <Accolade 
-        key={item.id}
-        id={item.id}
-        to={item.to}
-        from={item.from}
-        accolade={item.accolade}
+        key={item[0]}
+        id={id}
+        to={to}
+        from={from}
+        accolade={accolade}
         handleChange={handleChange}
         addLike={addLike}
-        likes={item.likes}
+        likes={likes}
         />
     )
 })

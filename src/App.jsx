@@ -28,7 +28,7 @@ export default function App () {
   React.useEffect(() => {
       localStorage.setItem("endorsements", JSON.stringify(endorsements)) //localStorage keeps copy of endorsements as well, for the purpose of hasLiked
       onValue(endorsementDb, (snapshot)=> { //state is updated with firebase DB
-        firebaseEndorsements = Object.values(snapshot.val())
+        firebaseEndorsements = Object.entries(snapshot.val())
         setEndorsements(prevEndorsements => {
           return {
           ...prevEndorsements,
@@ -82,19 +82,21 @@ console.log(endorsements);
     if (!itemToUpdate.hasLiked) {
     itemToUpdate.likes += 1
     itemToUpdate.hasLiked=true;
-    setEndorsements(prevEndorsements => {
+    // setEndorsements(prevEndorsements => {
       
-      return {
-        ...prevEndorsements,
-        [prevEndorsements.pastEndorsements[id]]: itemToUpdate
-      }
-    })
-    // const updates = {};
-    // updates['endorsements/' + itemToUpdate.id + '/' + 'likes' ] = itemToUpdate.likes;
-    // updates['endorsements/' + itemToUpdate.id + '/' + 'hasLiked' ] = itemToUpdate.hasLiked;
+    //   return {
+    //     ...prevEndorsements,
+    //     [prevEndorsements.pastEndorsements[id]]: itemToUpdate
+    //   }
+    // })
+    const updates = {};
+    updates['endorsements/' + itemToUpdate.id + '/' + 'likes' ] = itemToUpdate.likes;
+    updates['endorsements/' + itemToUpdate.id + '/' + 'hasLiked' ] = itemToUpdate.hasLiked;
 
-    
-    // update(endorsementDb, updates)
+
+
+
+    update(endorsementDb, updates) 
     
 
   }
