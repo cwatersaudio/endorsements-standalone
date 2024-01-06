@@ -20,7 +20,7 @@ let firebaseEndorsements=[]
 export default function App () {
     const [endorsements,setEndorsements] = React.useState({
     pastEndorsements: firebaseEndorsements, //local state is set by firebase DB
-    currentEndorsement: {from:"", to:"", accolade:"", id:nanoid(), likes:0, hasLiked:false}
+    currentEndorsement: {from:"", to:"", accolade:"", likes:0, hasLiked:false}
     })
 
 
@@ -58,7 +58,7 @@ console.log(endorsements);
     setEndorsements(prevEndorsements => {
       return {
       ...prevEndorsements,
-      currentEndorsement: {from:"", to:"", accolade:"", id:nanoid(), likes:0, hasLiked:false}
+      currentEndorsement: {from:"", to:"", accolade:"", likes:0, hasLiked:false}
   }})
   }
 
