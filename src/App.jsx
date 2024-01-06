@@ -34,7 +34,7 @@ export default function App () {
       }
       )
       
-      localStorage.setItem("endorsements", JSON.stringify(localLikes)) //localStorage keeps copy of endorsements as well, for the purpose of hasLiked
+      localStorage.setItem("endorsements", JSON.stringify(endorsements)) //localStorage keeps copy of endorsements as well, for the purpose of hasLiked
       onValue(endorsementDb, (snapshot)=> { //state is updated with firebase DB
         firebaseEndorsements = Object.entries(snapshot.val())
         setEndorsements(prevEndorsements => {
@@ -79,8 +79,9 @@ console.log(endorsements);
       })
     }
   function addLike(id) {
-    const itemToUpdate = endorsements.pastEndorsements.find((item)=> item[0] === id)
-    console.log(itemToUpdate)
+    const localLikes = JSON.parse(localStorage.getItem("endorsements"))
+    let itemToUpdate = localLikes.pastEndorsements.find((item)=> item[0] === id)
+    console.log(itemToUpdate);
     if (!itemToUpdate[1].hasLiked) {
     itemToUpdate[1].likes += 1
     itemToUpdate[1].hasLiked=true;
@@ -102,7 +103,7 @@ console.log(endorsements);
   }
   }
 
-  function resetLike(id) { 
+  function resetLike(id) { //resets hasLiked in DB --> would want to change to localStorage if possible
     console.log("double click")
     const itemToReset= endorsements.pastEndorsements.find((item)=> item[0] === id)
     itemToReset[1].hasLiked = false

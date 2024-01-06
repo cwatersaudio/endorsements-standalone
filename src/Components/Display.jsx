@@ -2,7 +2,7 @@ import React from "react"
 import Accolade from "./Accolade"
 
 
-export default function Endorsements ({pastEndorsements,handleChange,addLike,localLikes, resetLike}) {
+export default function Endorsements ({pastEndorsements,handleChange,addLike, resetLike}) {
 
 const endorsementDisplay = pastEndorsements.map(item => {
     const {id, to, from, accolade, likes} = item[1]
