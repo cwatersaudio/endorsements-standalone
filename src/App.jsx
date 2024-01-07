@@ -84,7 +84,7 @@ console.log(endorsements);
     }
   function addLike(id) {
     console.log(localLikes);
-    let localIndex = localLikes.pastEndorsements.find((item)=> item[0] === id) //
+    let localIndex = localLikes.pastEndorsements.find((item)=> item[0] === id) 
     let itemToUpdate = endorsements.pastEndorsements.find((item)=> item[0] === id)
     console.log(localIndex);
     console.log(itemToUpdate);
@@ -112,11 +112,9 @@ console.log(endorsements);
 
   function resetLike(id) { //resets hasLiked in DB --> would want to change to localStorage if possible
     console.log("double click")
-    const itemToReset= endorsements.pastEndorsements.find((item)=> item[0] === id)
-    itemToReset[1].hasLiked = false
+    let localIndex = localLikes.pastEndorsements.find((item)=> item[0] === id) 
 
-    const updates = {};
-    updates[itemToReset[0] + '/' + 'hasLiked' ] = itemToReset[1].hasLiked;
+    localIndex[1].hasLiked = false
   }
  
   
