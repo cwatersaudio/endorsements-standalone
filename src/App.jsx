@@ -24,20 +24,21 @@ export default function App () {
     currentEndorsement: {from:"", to:"", accolade:"", likes:0, hasLiked:false}
     })
 
-
-
-  React.useEffect(() => {
-      // localLikeArray = endorsements.pastEndorsements.map(item => { //local array of item IDs and hasLiked boolean
+  React.useEffect(()=>{
+    // localLikeArray = endorsements.pastEndorsements.map(item => { //local array of item IDs and hasLiked boolean
       //   return {
       //     likeID : item[0],
       //     hasLiked : false
       //   }
       // }
       // )
-      localLikes = JSON.parse(localStorage.getItem("endorsements"))
+    localStorage.setItem("endorsements", JSON.stringify(endorsements)) //localStorage keeps copy of endorsements as well, for the purpose of hasLiked
+    localLikes = JSON.parse(localStorage.getItem("endorsements"))
 
-      
-      localStorage.setItem("endorsements", JSON.stringify(endorsements)) //localStorage keeps copy of endorsements as well, for the purpose of hasLiked
+    console.log(localLikes);
+  },[endorsements])
+
+  React.useEffect(() => {
       onValue(endorsementDb, (snapshot)=> { //state is updated with firebase DB
         firebaseEndorsements = Object.entries(snapshot.val())
         setEndorsements(prevEndorsements => {
