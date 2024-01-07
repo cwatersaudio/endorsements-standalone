@@ -16,6 +16,7 @@ const database = getDatabase(app);
 const endorsementDb =  ref(database, "endorsements")
 let firebaseEndorsements=[]
 let localLikes = []
+// let localLikeArray;
 
 export default function App () {
     const [endorsements,setEndorsements] = React.useState({
@@ -26,13 +27,15 @@ export default function App () {
 
 
   React.useEffect(() => {
-      localLikes = endorsements.pastEndorsements.map(item => { //local array of item IDs and hasLiked boolean
-        return {
-          likeID : item[0],
-          hasLiked : false
-        }
-      }
-      )
+      // localLikeArray = endorsements.pastEndorsements.map(item => { //local array of item IDs and hasLiked boolean
+      //   return {
+      //     likeID : item[0],
+      //     hasLiked : false
+      //   }
+      // }
+      // )
+      localLikes = JSON.parse(localStorage.getItem("endorsements"))
+
       
       localStorage.setItem("endorsements", JSON.stringify(endorsements)) //localStorage keeps copy of endorsements as well, for the purpose of hasLiked
       onValue(endorsementDb, (snapshot)=> { //state is updated with firebase DB
@@ -79,12 +82,15 @@ console.log(endorsements);
       })
     }
   function addLike(id) {
-    const localLikes = JSON.parse(localStorage.getItem("endorsements"))
-    let itemToUpdate = localLikes.pastEndorsements.find((item)=> item[0] === id)
+    console.log(localLikes);
+    let localIndex = localLikes.pastEndorsements.find((item)=> item[0] === id) //
+    let itemToUpdate = endorsements.pastEndorsements.find((item)=> item[0] === id)
+    console.log(localIndex);
     console.log(itemToUpdate);
-    if (!itemToUpdate[1].hasLiked) {
+
+    if (!localIndex[1].hasLiked) {
     itemToUpdate[1].likes += 1
-    itemToUpdate[1].hasLiked=true;
+    localIndex[1].hasLiked=true;
     // setEndorsements(prevEndorsements => {
       
     //   return {
