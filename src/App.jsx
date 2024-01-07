@@ -16,27 +16,16 @@ const database = getDatabase(app);
 const endorsementDb =  ref(database, "endorsements")
 let firebaseEndorsements=[]
 let localLikes = []
-// let localLikeArray;
+
+
 
 export default function App () {
     const [endorsements,setEndorsements] = React.useState({
     pastEndorsements: firebaseEndorsements, //local state is set by firebase DB
-    currentEndorsement: {from:"", to:"", accolade:"", likes:0, hasLiked:false}
+    currentEndorsement: {from:"", to:"", accolade:"", likes:0}
     })
 
-  React.useEffect(()=>{
-    // localLikeArray = endorsements.pastEndorsements.map(item => { //local array of item IDs and hasLiked boolean
-      //   return {
-      //     likeID : item[0],
-      //     hasLiked : false
-      //   }
-      // }
-      // )
-    localStorage.setItem("endorsements", JSON.stringify(endorsements)) //localStorage keeps copy of endorsements as well, for the purpose of hasLiked
-    localLikes = JSON.parse(localStorage.getItem("endorsements"))
-
-    console.log(localLikes);
-  },[endorsements])
+  
 
   React.useEffect(() => {
       onValue(endorsementDb, (snapshot)=> { //state is updated with firebase DB
@@ -50,7 +39,25 @@ export default function App () {
       })
   },[]) //what should be the thing in the array?
 
+  let localLikeArray = endorsements.pastEndorsements.map(item => { //local array of item IDs and hasLiked boolean
+    return {
+      likeID : item[0],
+    }
+  }
+  )
+  
+  
+  React.useEffect(()=>{
+    console.log(localLikeArray);
+
+    localStorage.setItem("endorsements", JSON.stringify(localLikeArray)) //localStorage keeps copy of endorsements as well, for the purpose of hasLiked
+    // localLikes = JSON.parse(localStorage.getItem("endorsements"))
+
+    // console.log(localLikes);
+  },[localLikeArray])
+
 console.log(endorsements);
+
 
   function addEndorsement (event) {
     event.preventDefault()
@@ -63,7 +70,7 @@ console.log(endorsements);
     setEndorsements(prevEndorsements => {
       return {
       ...prevEndorsements,
-      currentEndorsement: {from:"", to:"", accolade:"", likes:0, hasLiked:false}
+      currentEndorsement: {from:"", to:"", accolade:"", likes:0}
   }})
   }
 
@@ -83,15 +90,17 @@ console.log(endorsements);
       })
     }
   function addLike(id) {
-    console.log(localLikes);
-    let localIndex = localLikes.pastEndorsements.find((item)=> item[0] === id) 
+    // console.log(localLikes);
+    let localValue = localLikeArray.find((item)=> item.likeID === id) 
+    let localIndex = localLikeArray.findIndex((item)=> item.likeID === id) 
     let itemToUpdate = endorsements.pastEndorsements.find((item)=> item[0] === id)
     console.log(localIndex);
-    console.log(itemToUpdate);
 
-    if (!localIndex[1].hasLiked) {
+    if (!localValue.hasLiked) {
     itemToUpdate[1].likes += 1
-    localIndex[1].hasLiked=true;
+    localLikeArray[localIndex].hasLiked = true
+    console.log(localLikeArray)
+
     // setEndorsements(prevEndorsements => {
       
     //   return {
@@ -101,7 +110,6 @@ console.log(endorsements);
     // })
     const updates = {};
     updates[itemToUpdate[0] + '/' + 'likes' ] = itemToUpdate[1].likes;
-    updates[itemToUpdate[0] + '/' + 'hasLiked' ] = itemToUpdate[1].hasLiked;
 
 
 
@@ -112,9 +120,14 @@ console.log(endorsements);
 
   function resetLike(id) { //resets hasLiked in DB --> would want to change to localStorage if possible
     console.log("double click")
-    let localIndex = localLikes.pastEndorsements.find((item)=> item[0] === id) 
+    let localIndex = localLikeArray.findIndex((item)=> item.likeID === id) 
 
-    localIndex[1].hasLiked = false
+    localStorage.setItem("endorsements", (prevLocal)=> {
+      return [
+        ...prevLocal,
+        prevLocal[localIndex].hasLiked = false
+      ]
+    })
   }
  
   
