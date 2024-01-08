@@ -1,13 +1,16 @@
-import React from "react"
-import Accolade from "./Accolade"
+import React from "react";
+import Accolade from "./Accolade";
 
-
-export default function Endorsements ({pastEndorsements,handleChange,addLike, resetLike}) {
-
-const endorsementDisplay = pastEndorsements.map(item => {
-    const {id, to, from, accolade, likes} = item[1]
+export default function Endorsements({
+  pastEndorsements,
+  handleChange,
+  addLike,
+  resetLike,
+}) {
+  const endorsementDisplay = pastEndorsements.map((item) => {
+    const { id, to, from, accolade, likes } = item[1];
     return (
-        <Accolade 
+      <Accolade
         key={item[0]}
         id={item[0]}
         to={to}
@@ -16,18 +19,10 @@ const endorsementDisplay = pastEndorsements.map(item => {
         handleChange={handleChange}
         addLike={addLike}
         likes={likes}
-        resetLike = {resetLike}
-        />
-    )
-})
+        resetLike={resetLike}
+      />
+    );
+  });
 
-
-return (
-    <div id="endorsementDisplay">
-        {endorsementDisplay}
-        
-    
-    </div>
-)
-
+  return <div id='endorsementDisplay'>{endorsementDisplay}</div>;
 }
