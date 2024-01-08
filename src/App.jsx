@@ -15,7 +15,6 @@ const app = initializeApp(appSettings);
 const database = getDatabase(app);
 const endorsementDb =  ref(database, "endorsements")
 let firebaseEndorsements=[]
-let localLikes = []
 
 
 
@@ -51,10 +50,8 @@ export default function App () {
     console.log(localLikeArray);
 
     localStorage.setItem("endorsements", JSON.stringify(localLikeArray)) //localStorage keeps copy of endorsements as well, for the purpose of hasLiked
-    // localLikes = JSON.parse(localStorage.getItem("endorsements"))
     console.log(localLikeArray);
 
-    // console.log(localLikes);
   },[localLikeArray])
 
 console.log(endorsements);
@@ -91,7 +88,6 @@ console.log(endorsements);
       })
     }
   function addLike(id) {
-    // console.log(localLikes);
     let localValue = localLikeArray.find((item)=> item.likeID === id) 
     let localIndex = localLikeArray.findIndex((item)=> item.likeID === id) 
     let itemToUpdate = endorsements.pastEndorsements.find((item)=> item[0] === id)
@@ -139,7 +135,6 @@ return (
           pastEndorsements = {endorsements.pastEndorsements}
           handleChange={handleChange}
           addLike={addLike}
-          localLikes ={localLikes}
           resetLike={resetLike}
           />
       </main>
