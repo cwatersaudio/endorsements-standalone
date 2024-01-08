@@ -1,8 +1,5 @@
-# React + Vite
+This is an adaptation of a solo project from Scrimba ("We Are the Champions").
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+I'd already started earning React when I came to this project so I decided to try to implement it in React rather than Javascript.  
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Data for each endorsement card is stored in a firebase realtime database; the database sets local state and state is passed to the components which render the various elements.  I'm trying to keep track of whether a user has liked an endorsement card separately from state and the database, using localStorage, so that the like status would be stored locally.  This feature currently is not working properly (see issues).
