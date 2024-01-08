@@ -20,7 +20,6 @@ export default function Input ({currentEndorsement,handleChange,addEndorsement})
                 name="to"
                 onChange={handleChange}
                 value={currentEndorsement.to}
-                //need to figure out a way to display default values
                 />
                 <input 
                 placeholder="From:"

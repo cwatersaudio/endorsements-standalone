@@ -19,7 +19,6 @@ export default function Accolade (props) {
                 onClick={handleClick}
                 onContextMenu={()=>{props.resetLike(props.id)}}
                 className="bold"
-                //add name field
                 >{`💜 ${props.likes}`}</button>
             </div>
 

@@ -28,7 +28,7 @@ export default function App () {
   
 
   React.useEffect(() => {
-      onValue(endorsementDb, (snapshot)=> { //state is updated with firebase DB
+      onValue(endorsementDb, (snapshot)=> { //state is updated by firebase DB
         firebaseEndorsements = Object.entries(snapshot.val())
         setEndorsements(prevEndorsements => {
           return {
@@ -39,7 +39,7 @@ export default function App () {
       })
   },[]) //what should be the thing in the array?
 
-  let localLikeArray = endorsements.pastEndorsements.map(item => { //local array of item IDs and hasLiked boolean
+  const localLikeArray = endorsements.pastEndorsements.map(item => { //local array of item IDs and hasLiked boolean
     return {
       likeID : item[0],
     }
@@ -52,6 +52,7 @@ export default function App () {
 
     localStorage.setItem("endorsements", JSON.stringify(localLikeArray)) //localStorage keeps copy of endorsements as well, for the purpose of hasLiked
     // localLikes = JSON.parse(localStorage.getItem("endorsements"))
+    console.log(localLikeArray);
 
     // console.log(localLikes);
   },[localLikeArray])
@@ -101,13 +102,6 @@ console.log(endorsements);
     localLikeArray[localIndex].hasLiked = true
     console.log(localLikeArray)
 
-    // setEndorsements(prevEndorsements => {
-      
-    //   return {
-    //     ...prevEndorsements,
-    //     [prevEndorsements.pastEndorsements[id]]: itemToUpdate
-    //   }
-    // })
     const updates = {};
     updates[itemToUpdate[0] + '/' + 'likes' ] = itemToUpdate[1].likes;
 
@@ -118,7 +112,7 @@ console.log(endorsements);
   }
   }
 
-  function resetLike(id) { //resets hasLiked in DB --> would want to change to localStorage if possible
+  function resetLike(id) { 
     console.log("double click")
     let localIndex = localLikeArray.findIndex((item)=> item.likeID === id) 
 
