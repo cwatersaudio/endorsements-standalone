@@ -29,19 +29,18 @@ export default function App() {
 
   React.useEffect(() => {
     onValue(endorsementDb, (snapshot) => {
-      //state is updated by firebase DB
       firebaseEndorsements = Object.entries(snapshot.val());
       setEndorsements((prevEndorsements) => {
         return {
           ...prevEndorsements,
-          pastEndorsements: firebaseEndorsements,
+          pastEndorsements: firebaseEndorsements, //state is updated by firebase DB
         };
       });
     });
   }, []); //what should be the thing in the array?
 
   const localLikeArray = endorsements.pastEndorsements.map((item) => {
-    //local array of item IDs and hasLiked boolean
+    //local array of item IDs; hasLiked boolean will be added by addLike() function
     return {
       likeID: item[0],
     };
@@ -60,10 +59,11 @@ export default function App() {
     event.preventDefault();
 
     resetCurrentEndorsement();
-    push(endorsementDb, endorsements.currentEndorsement); //how to add to beginning of db??
+    push(endorsementDb, endorsements.currentEndorsement); //how to add to beginning of firebase db??
   }
 
   function resetCurrentEndorsement() {
+    //clears input fields and resets currentEndorsement
     setEndorsements((prevEndorsements) => {
       return {
         ...prevEndorsements,
