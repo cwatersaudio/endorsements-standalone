@@ -20,6 +20,7 @@ const app = initializeApp(appSettings);
 const database = getDatabase(app);
 const endorsementDb = ref(database, "endorsements");
 let firebaseEndorsements = [];
+let localLikeArray = [];
 
 export default function App() {
   const [endorsements, setEndorsements] = React.useState({
@@ -39,19 +40,29 @@ export default function App() {
     });
   }, []); //what should be the thing in the array?
 
-  const localLikeArray = endorsements.pastEndorsements.map((item) => {
+  function initializeLocalLikeArray() {
+    localLikeArray = endorsements.pastEndorsements.map((item) => {
     //local array of item IDs; hasLiked boolean will be added by addLike() function
     return {
       likeID: item[0],
     };
-  });
+  })
+console.log(localLikeArray)
+};
 
   React.useEffect(() => {
-    console.log(localLikeArray);
-
+    console.log("initializing")
+    setTimeout(()=>{
+      initializeLocalLikeArray()
     localStorage.setItem("endorsements", JSON.stringify(localLikeArray)); //localStorage keeps copy of endorsements as well, for the purpose of hasLiked
-    console.log(localLikeArray);
-  }, [localLikeArray]);
+    },2000)
+    
+  }, []);
+
+  React.useEffect(()=>{
+    console.log("updating")
+    localStorage.setItem("endorsements", JSON.stringify(localLikeArray));
+  },[localLikeArray])
 
   console.log(endorsements);
 
