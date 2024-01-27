@@ -38,33 +38,34 @@ export default function App() {
         };
       });
     });
-  }, []); //what should be the thing in the array?
+  }, []);
 
   function initializeLocalLikeArray() {
-    localLikeArray = endorsements.pastEndorsements.map((item) => {
-    //local array of item IDs; hasLiked boolean will be added by addLike() function
-    return {
-      likeID: item[0],
-    };
-  })
-console.log(localLikeArray)
-};
+    localLikeArray = firebaseEndorsements.map((item) => {
+      //local array of item IDs; hasLiked boolean will be added by addLike() function
+      return {
+        likeID: item[0],
+      };
+    })
+    console.log(localLikeArray)
+  };
 
   React.useEffect(() => {
     console.log("initializing")
-    setTimeout(()=>{
+    setTimeout(() => {
       initializeLocalLikeArray()
-    localStorage.setItem("endorsements", JSON.stringify(localLikeArray)); //localStorage keeps copy of endorsements as well, for the purpose of hasLiked
-    },2000)
-    
+      localStorage.setItem("endorsements", JSON.stringify(localLikeArray)); //localStorage keeps copy of endorsements as well, for the purpose of hasLiked
+    }, 2000)
+    console.log(localStorage.getItem("endorsements"))
+
   }, []);
 
-  React.useEffect(()=>{
-    console.log("updating")
-    localStorage.setItem("endorsements", JSON.stringify(localLikeArray));
-  },[localLikeArray])
+  // React.useEffect(() => {
+  //   console.log("updating")
+  //   localStorage.setItem("endorsements", JSON.stringify(localLikeArray));
+  // }, [localLikeArray])
 
-  console.log(endorsements);
+  // console.log(endorsements);
 
   function addEndorsement(event) {
     event.preventDefault();
@@ -98,6 +99,8 @@ console.log(localLikeArray)
     });
   }
   function addLike(id) {
+    let localStoragearray = localStorage.getItem('endorsements')
+    console.log(localStoragearray)
     let localValue = localLikeArray.find((item) => item.likeID === id);
     let localIndex = localLikeArray.findIndex((item) => item.likeID === id);
     let itemToUpdate = endorsements.pastEndorsements.find(
