@@ -100,11 +100,11 @@ export default function App() {
     });
   }
   function addLike(id) {
-    let localStoragearray = JSON.parse(localStorage.getItem('endorsements'))
+    const localStoragearray = JSON.parse(localStorage.getItem('endorsements'))
     console.log(localStoragearray)
-    let localValue = localStoragearray.find((item) => item.likeID === id);
-    let localIndex = localStoragearray.findIndex((item) => item.likeID === id);
-    let itemToUpdate = endorsements.pastEndorsements.find(
+    const localValue = localStoragearray.find((item) => item.likeID === id);
+    const localIndex = localStoragearray.findIndex((item) => item.likeID === id);
+    const itemToUpdate = endorsements.pastEndorsements.find(
       (item) => item[0] === id
     );
 
@@ -123,7 +123,7 @@ export default function App() {
 
   function resetLike(id) {
     console.log("double click");
-    let localIndex = localLikeArray.findIndex((item) => item.likeID === id);
+    const localIndex = localLikeArray.findIndex((item) => item.likeID === id);
 
     localStorage.setItem("endorsements", (prevLocal) => {
       return [...prevLocal, (prevLocal[localIndex].hasLiked = false)];
