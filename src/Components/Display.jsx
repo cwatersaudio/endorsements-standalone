@@ -1,6 +1,8 @@
 import React from "react";
 import Accolade from "./Accolade";
 import useEmblaCarousel from 'embla-carousel-react'
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
+
 
 
 
@@ -19,8 +21,10 @@ export default function Endorsements({
     draggable: true,
     speed: 500,
     easing: 'easeOutCubic',
+    dragFree: true,
 
-  })
+
+  }, [WheelGesturesPlugin()])
 
 
 
