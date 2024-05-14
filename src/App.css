@@ -23,10 +23,10 @@ h1 {
 /* Header Styles */
 #header {
     color: #FFFFFF;
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Josefin Sans',sans-serif;
     display: flex;
     flex-direction: column;
-    padding: 51px 59px 8px;
+    padding: 51px 59px 8px; 
 }
 
 
@@ -56,19 +56,18 @@ h1 {
 }
 
 
-.user--input {
+.user--input{
     border-radius: 8px;
     background: #444059;
-    border: none;
+    border:none;
     color: #8F8F8F;
     font-family: Inter;
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    padding: 5px;
+    padding:5px;
 }
-
 .endorsement--box {
     width: 317px;
     height: 118px;
@@ -78,12 +77,12 @@ h1 {
 }
 
 #to-from--area {
-    display: inline-flex;
+    display:inline-flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 9px;
     width: 317px;
-    margin: 10px;
+    margin: 10px ;
 }
 
 .to-from--input {
@@ -91,7 +90,7 @@ h1 {
     flex-shrink: 0;
     border-radius: 8px;
     background: #444059;
-    border: none;
+    border:none;
     color: #8F8F8F;
     font-family: Inter;
     font-size: 15px;
@@ -101,12 +100,11 @@ h1 {
     width: 152.852px;
     padding: 10px;
 }
-
 #submitButton {
     width: 317px;
     height: 61px;
     border-radius: 8px;
-    flex-shrink: 0;
+    flex-shrink: 0; 
     background-color: #28A9F1;
     color: #04131C;
     text-align: center;
@@ -115,14 +113,14 @@ h1 {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin-top: 13px;
+    margin-top: 13px;    
 }
 
 
 /* Endorsement Display Styling */
 
 #endorsementDisplay {
-    display: flex;
+    display:flex;
     flex-direction: column;
     gap: 10px;
     align-items: center;
@@ -141,7 +139,6 @@ h1 {
     width: 317px;
     padding: 14px;
 }
-
 .to-from--display {
     display: flex;
     justify-content: left;
@@ -150,25 +147,10 @@ h1 {
 
 .bottom--bar {
     display: flex;
-    justify-content: space-between;
+    justify-content:space-between;
 }
 
 #likeButton {
     border: none;
     background-color: transparent;
-}
-
-/* Carousel Styles */
-
-.embla {
-    overflow: hidden;
-}
-
-.embla__container {
-    display: flex;
-}
-
-.embla__slide {
-    flex: 0 0 100%;
-    min-width: 0;
 }

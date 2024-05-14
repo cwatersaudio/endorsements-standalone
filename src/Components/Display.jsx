@@ -1,10 +1,5 @@
 import React from "react";
 import Accolade from "./Accolade";
-import useEmblaCarousel from 'embla-carousel-react'
-import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
-
-
-
 
 export default function Endorsements({
   pastEndorsements,
@@ -12,23 +7,6 @@ export default function Endorsements({
   addLike,
   resetLike,
 }) {
-
-  const [emblaRef] = useEmblaCarousel({
-    startIndex: 0,
-    axis: 'x',
-    containScroll: 'trimSnaps',
-    loop: true,
-    draggable: true,
-    speed: 500,
-    easing: 'easeOutCubic',
-    dragFree: true,
-
-
-  }, [WheelGesturesPlugin()])
-
-
-
-
   const endorsementDisplay = pastEndorsements.map((item) => {
     const { id, to, from, accolade, likes } = item[1];
     return (
@@ -46,20 +24,5 @@ export default function Endorsements({
     );
   });
 
-  return (
-    // <div id='endorsementDisplay'>{endorsementDisplay}</div>
-    <div className="embla" ref={emblaRef}>
-      <div className="embla__container">
-        {/* <div className="embla__slide">Slide 1</div>
-        <div className="embla__slide">Slide 2</div>
-        <div className="embla__slide">Slide 3</div> */}
-        {endorsementDisplay}
-
-      </div>
-    </div>
-  );
+  return <div id='endorsementDisplay'>{endorsementDisplay}</div>;
 }
-
-
-
-

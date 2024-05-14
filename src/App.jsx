@@ -99,12 +99,18 @@ export default function App() {
     });
   }
   function addLike(id) {
-    const localStoragearray = JSON.parse(localStorage.getItem('endorsements'))
+    let localStoragearray = JSON.parse(localStorage.getItem('endorsements'))
     console.log(localStoragearray)
+<<<<<<< HEAD
     const localValue = localStoragearray.find((item) => item.likeID === id);
     const localIndex = localStoragearray.findIndex((item) => item.likeID === id);
     const itemToUpdate = endorsements.pastEndorsements.find(
 
+=======
+    let localValue = localStoragearray.find((item) => item.likeID === id);
+    let localIndex = localStoragearray.findIndex((item) => item.likeID === id);
+    let itemToUpdate = endorsements.pastEndorsements.find(
+>>>>>>> parent of a150174 (implemented embla carousel)
       (item) => item[0] === id
     );
     console.log(localIndex);
@@ -123,7 +129,7 @@ export default function App() {
 
   function resetLike(id) {
     console.log("double click");
-    const localIndex = localLikeArray.findIndex((item) => item.likeID === id);
+    let localIndex = localLikeArray.findIndex((item) => item.likeID === id);
 
     localStorage.setItem("endorsements", (prevLocal) => {
       return [...prevLocal, (prevLocal[localIndex].hasLiked = false)];
