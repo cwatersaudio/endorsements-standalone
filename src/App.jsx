@@ -41,7 +41,6 @@ export default function App() {
   }, []);
 
   function initializeLocalLikeArray() {
-
     localLikeArray = firebaseEndorsements.map((item) => {
       //local array of item IDs; hasLiked boolean will be added by addLike() function
       return {
@@ -61,12 +60,12 @@ export default function App() {
 
   }, []);
 
-  React.useEffect(() => {
-    console.log("updating")
-    localStorage.setItem("endorsements", JSON.stringify(localLikeArray));
-  }, [localLikeArray])
+  // React.useEffect(() => {
+  //   console.log("updating")
+  //   localStorage.setItem("endorsements", JSON.stringify(localLikeArray));
+  // }, [localLikeArray])
 
-  console.log(endorsements);
+  // console.log(endorsements);
 
   function addEndorsement(event) {
     event.preventDefault();
@@ -100,24 +99,32 @@ export default function App() {
     });
   }
   function addLike(id) {
+<<<<<<< HEAD
     const localStoragearray = JSON.parse(localStorage.getItem('endorsements'))
     console.log(localStoragearray)
     const localValue = localStoragearray.find((item) => item.likeID === id);
     const localIndex = localStoragearray.findIndex((item) => item.likeID === id);
     const itemToUpdate = endorsements.pastEndorsements.find(
+=======
+    let localStoragearray = localStorage.getItem('endorsements')
+    console.log(localStoragearray)
+    let localValue = localLikeArray.find((item) => item.likeID === id);
+    let localIndex = localLikeArray.findIndex((item) => item.likeID === id);
+    let itemToUpdate = endorsements.pastEndorsements.find(
+>>>>>>> parent of b03a15a (I believe this is working)
       (item) => item[0] === id
     );
+    console.log(localIndex);
 
     if (!localValue.hasLiked) {
       itemToUpdate[1].likes += 1;
-      localStoragearray[localIndex].hasLiked = true;
-      console.log(localStoragearray);
+      localLikeArray[localIndex].hasLiked = true;
+      console.log(localLikeArray);
 
-      const updates = {}; //updates likes in DB
+      const updates = {};
       updates[itemToUpdate[0] + "/" + "likes"] = itemToUpdate[1].likes;
-      update(endorsementDb, updates);
 
-      localStorage.setItem("endorsements", JSON.stringify(localStoragearray))
+      update(endorsementDb, updates);
     }
   }
 
