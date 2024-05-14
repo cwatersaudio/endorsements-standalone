@@ -99,19 +99,12 @@ export default function App() {
     });
   }
   function addLike(id) {
-<<<<<<< HEAD
     const localStoragearray = JSON.parse(localStorage.getItem('endorsements'))
     console.log(localStoragearray)
     const localValue = localStoragearray.find((item) => item.likeID === id);
     const localIndex = localStoragearray.findIndex((item) => item.likeID === id);
     const itemToUpdate = endorsements.pastEndorsements.find(
-=======
-    let localStoragearray = localStorage.getItem('endorsements')
-    console.log(localStoragearray)
-    let localValue = localLikeArray.find((item) => item.likeID === id);
-    let localIndex = localLikeArray.findIndex((item) => item.likeID === id);
-    let itemToUpdate = endorsements.pastEndorsements.find(
->>>>>>> parent of b03a15a (I believe this is working)
+
       (item) => item[0] === id
     );
     console.log(localIndex);
